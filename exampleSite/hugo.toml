@@ -1,0 +1,66 @@
+baseURL = 'http://localhost:1314/'
+locale = 'zh-CN'
+title = 'Wimi 的个人空间'
+theme = 'hugo-wimi'
+copyright = 'Wimi'
+
+[pagination]
+  pagerSize = 10
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[params]
+  brand = 'wimi.'
+  author = 'Wimi'
+  description = '关于技术、生活和那些值得记录的瞬间。'
+  dateFormat = '2006/01/02'
+  footer = '用 Hugo 构建，安静地写作。'
+
+  [params.home]
+    intro = '写一些关于技术、生活的文字，也收藏那些值得记住的瞬间。'
+    recentPosts = 8
+    [[params.home.links]]
+      name = 'GitHub'
+      url = 'https://github.com/'
+
+  [params.article]
+    tocOpen = true
+    tocTitle = '目录'
+    showAuthor = true
+    showTaxonomies = true
+
+  [params.comments]
+    enabled = true
+    apiBase = '/api/comments'
+    turnstileSiteKey = ''
+
+  [params.photos]
+    baseURL = 'https://picsum.photos/'
+
+[[menu.main]]
+  name = '文章'
+  pageRef = '/posts'
+  weight = 10
+[[menu.main]]
+  name = '标签'
+  pageRef = '/tags'
+  weight = 20
+[[menu.main]]
+  name = '相册'
+  pageRef = '/photos'
+  weight = 30
+[[menu.main]]
+  name = '留言'
+  pageRef = '/guestbook'
+  weight = 40

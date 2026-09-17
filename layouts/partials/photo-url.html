@@ -1,0 +1,15 @@
+{{ $src := . | default "" }}
+{{ if not $src }}
+  {{ return "" }}
+{{ end }}
+{{ if or (strings.HasPrefix $src "https://") (strings.HasPrefix $src "http://") }}
+  {{ return $src }}
+{{ end }}
+{{ if strings.HasPrefix $src "/" }}
+  {{ return $src }}
+{{ end }}
+{{ $base := site.Params.photos.baseURL | default "" }}
+{{ if not $base }}
+  {{ return ($src | relURL) }}
+{{ end }}
+{{ return (printf "%s/%s" (strings.TrimSuffix "/" $base) (strings.TrimPrefix "/" $src)) }}

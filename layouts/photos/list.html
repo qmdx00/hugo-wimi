@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="gallery-width album-index">
+  <header class="page-heading">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-lead">{{ . }}</div>{{ else }}{{ with .Description }}<p class="page-lead">{{ . }}</p>{{ end }}{{ end }}
+  </header>
+  {{ $paginator := .Paginate .RegularPages.ByDate.Reverse }}
+  <div class="album-grid">
+    {{ range $paginator.Pages }}
+      {{ $cover := partial "photo-cover.html" . }}
+      <article class="album-card">
+        <a class="album-image-link" href="{{ .RelPermalink }}" aria-label="查看相册：{{ .Title }}">
+          {{ if $cover }}
+            <img src="{{ $cover }}" alt="" loading="lazy" decoding="async">
+          {{ else }}
+            <span class="album-placeholder">查看相册</span>
+          {{ end }}
+        </a>
+        <div class="album-caption">
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006/01/02") }}</time>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" $paginator }}
+</div>
+{{ end }}

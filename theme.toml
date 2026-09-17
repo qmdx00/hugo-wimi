@@ -1,0 +1,12 @@
+name = "wimi"
+license = "MIT"
+licenselink = "https://github.com/qmdx00/hugo-wimi/blob/master/LICENSE"
+description = "A quiet, editorial Hugo theme for writing and photography."
+homepage = "https://github.com/qmdx00/hugo-wimi"
+tags = ["blog", "minimal", "photography", "responsive"]
+features = ["articles", "albums", "taxonomies", "guestbook", "comments"]
+min_version = "0.166.0"
+
+[author]
+name = "Wimi Yuan"
+homepage = "https://wimi.space"

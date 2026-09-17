@@ -1,0 +1,30 @@
+{{ $enabled := and site.Params.comments.enabled (ne .Params.comments false) }}
+{{ if $enabled }}
+  {{ $key := .Params.commentKey | default .RelPermalink }}
+  <section class="comments reading-width" aria-labelledby="comments-heading" data-comments data-page-key="{{ $key }}" data-api-base="{{ site.Params.comments.apiBase | default "/api/comments" }}">
+    <div class="section-heading">
+      <h2 id="comments-heading">{{ if eq .Section "guestbook" }}留言{{ else }}评论{{ end }}</h2>
+      <span class="comment-count" data-comment-count></span>
+    </div>
+    <form class="comment-form" data-comment-form>
+      <div class="comment-fields">
+        <label>称呼 <span aria-hidden="true">*</span><input name="author" maxlength="40" autocomplete="name" required></label>
+        <label>网站 <span class="optional">选填</span><input name="website" type="url" maxlength="200" placeholder="https://"></label>
+      </div>
+      <label class="comment-message">内容 <span aria-hidden="true">*</span><textarea name="body" rows="5" maxlength="2000" required></textarea></label>
+      <div class="comment-actions">
+        {{ with site.Params.comments.turnstileSiteKey }}
+          <div class="cf-turnstile" data-sitekey="{{ . }}"></div>
+        {{ end }}
+        <button type="submit">提交{{ if eq $.Section "guestbook" }}留言{{ else }}评论{{ end }}</button>
+      </div>
+      <p class="form-note">提交后经审核展示。请勿填写敏感信息。</p>
+      <p class="form-status" data-comment-status role="status" aria-live="polite"></p>
+    </form>
+    <div class="comment-list" data-comment-list aria-live="polite"><p class="empty-state">正在加载评论…</p></div>
+    <button class="load-more" data-load-more type="button" hidden>加载更多</button>
+  </section>
+  {{ with site.Params.comments.turnstileSiteKey }}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  {{ end }}
+{{ end }}

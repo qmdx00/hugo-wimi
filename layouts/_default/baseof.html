@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="page-kind-{{ .Kind }}{{ with .Section }} page-section-{{ . | urlize }}{{ end }}">
+  <a class="skip-link" href="#main-content">跳转到正文</a>
+  <div class="site-shell">
+    {{ partial "header.html" . }}
+    <main class="site-main" id="main-content">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+  {{ if eq .Section "photos" }}
+    {{ with resources.Get "js/gallery.js" | minify | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
+  {{ end }}
+  {{ if and site.Params.comments.enabled (or (and .IsPage (ne .Section "guestbook")) (eq .Section "guestbook")) }}
+    {{ with resources.Get "js/comments.js" | minify | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
+  {{ end }}
+</body>
+</html>

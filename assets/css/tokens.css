@@ -1,0 +1,17 @@
+:root {
+  color-scheme: light;
+  --paper: #fff;
+  --ink: #242b32;
+  --muted: #6b747d;
+  --subtle: #929aa2;
+  --accent: #44657e;
+  --accent-hover: #274b65;
+  --surface: #f5f7f8;
+  --rule: #e8ecef;
+  --content-width: 44rem;
+  --gallery-width: 65rem;
+  --shell-width: 70rem;
+  --font-body: "Iowan Old Style", "Baskerville", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --font-ui: "Avenir Next", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}

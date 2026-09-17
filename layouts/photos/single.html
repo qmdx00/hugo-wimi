@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article class="album-detail gallery-width">
+  {{ partial "article-header.html" . }}
+  <div class="prose album-prose">{{ .Content }}</div>
+  {{ with .Params.photos }}
+    <div class="photo-gallery" data-gallery>
+      {{ range . }}
+        {{ $full := partial "photo-url.html" .src }}
+        {{ $preview := partial "photo-url.html" (.preview | default .src) }}
+        <figure>
+          <img src="{{ $preview }}" data-full="{{ $full }}" alt="{{ .alt | default "" }}"{{ with .width }} width="{{ . }}"{{ end }}{{ with .height }} height="{{ . }}"{{ end }} loading="lazy" decoding="async">
+          {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+        </figure>
+      {{ end }}
+    </div>
+  {{ end }}
+</article>
+{{ partial "comments.html" . }}
+{{ end }}

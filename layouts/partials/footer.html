@@ -1,0 +1,4 @@
+<footer class="site-footer">
+  <span>© {{ now.Year }} {{ site.Params.author | default site.Title }}</span>
+  {{ with site.Params.footer }}<span>{{ . | markdownify }}</span>{{ end }}
+</footer>

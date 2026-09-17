@@ -1,0 +1,15 @@
+{{ $cover := .Params.cover | default "" }}
+{{ if and (not $cover) .Params.photos }}
+  {{ $first := index .Params.photos 0 }}
+  {{ $cover = $first.preview | default $first.src }}
+{{ end }}
+{{ if not $cover }}
+  {{ with .Resources.ByType "image" }}
+    {{ with index . 0 }}{{ $cover = .RelPermalink }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ if not $cover }}
+  {{ $matches := findRE `(?i)src=["'][^"']+["']` .RawContent 1 }}
+  {{ with $matches }}{{ $cover = replaceRE `(?i)^src=["']([^"']+)["']$` "$1" (index . 0) }}{{ end }}
+{{ end }}
+{{ return (partial "photo-url.html" $cover) }}
