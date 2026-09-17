@@ -1,8 +1,8 @@
 {{ define "main" }}
 <div class="not-found reading-width">
   <p class="eyebrow">404</p>
-  <h1>这页暂时不在这里</h1>
-  <p>地址可能已经改变，也可能从未存在。</p>
-  <a href="{{ site.Home.RelPermalink }}">返回首页 →</a>
+  <h1>{{ i18n "notFoundTitle" }}</h1>
+  <p>{{ i18n "notFoundBody" }}</p>
+  <a href="{{ site.Home.RelPermalink }}">{{ i18n "backHome" }} →</a>
 </div>
 {{ end }}

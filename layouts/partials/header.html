@@ -1,7 +1,7 @@
 {{ $page := . }}
 <header class="site-header">
-  <a class="site-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}，返回首页">{{ site.Params.brand | default "wimi" }}</a>
-  <nav class="site-nav" aria-label="主导航">
+  <a class="site-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ i18n "brandHome" site.Title }}">{{ site.Params.brand | default "wimi" }}</a>
+  <nav class="site-nav" aria-label="{{ i18n "navLabel" }}">
     <ul>
       {{ range site.Menus.main }}
         {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}

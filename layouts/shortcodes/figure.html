@@ -1,6 +1,6 @@
-{{ $src := .Get "src" }}
-{{ $alt := .Get "alt" | default "" }}
-{{ $caption := .Get "caption" | default "" }}
+{{- $src := partial "photo-url.html" (.Get "src") -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
 <figure>
   <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
   {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}

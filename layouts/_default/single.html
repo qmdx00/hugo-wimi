@@ -3,7 +3,7 @@
   {{ partial "article-header.html" . }}
   {{ if and .Params.toc (gt (len .TableOfContents) 0) }}
     <details class="toc"{{ if site.Params.article.tocOpen }} open{{ end }}>
-      <summary>{{ site.Params.article.tocTitle | default "目录" }}</summary>
+      <summary>{{ site.Params.article.tocTitle | default (i18n "toc") }}</summary>
       {{ .TableOfContents }}
     </details>
   {{ end }}

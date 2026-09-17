@@ -16,7 +16,7 @@
 .prose li::marker { color: var(--subtle); }
 .prose a { color: var(--accent); }
 .prose a:hover { color: var(--accent-hover); }
-.prose blockquote { margin: 1.8em 0; padding: .1em 0 .1em 1.2em; border-left: 2px solid #c8d6df; color: var(--muted); }
+.prose blockquote { margin: 1.8em 0; padding: .1em 0 .1em 1.2em; border-left: 2px solid var(--quote-bar); color: var(--muted); }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose pre { overflow-x: auto; margin: 1.6em 0; padding: 1.25rem 1.4rem; background: var(--surface); border-radius: 3px; font: .85rem/1.65 var(--font-mono); }
 .prose :not(pre) > code { padding: .13em .3em; background: var(--surface); border-radius: 2px; font: .85em var(--font-mono); }

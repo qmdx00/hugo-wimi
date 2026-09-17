@@ -5,6 +5,6 @@
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </li>
   {{ else }}
-    <li class="empty-state">暂时没有文章。</li>
+    <li class="empty-state">{{ i18n "emptyPosts" }}</li>
   {{ end }}
 </ul>

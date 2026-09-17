@@ -8,10 +8,32 @@
   --accent-hover: #274b65;
   --surface: #f5f7f8;
   --rule: #e8ecef;
+  --selection: #dce8ee;
+  --quote-bar: #c8d6df;
+  --input-border: #dce2e6;
+  --on-ink: #fff;
   --content-width: 44rem;
   --gallery-width: 65rem;
   --shell-width: 70rem;
   --font-body: "Iowan Old Style", "Baskerville", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", serif;
   --font-ui: "Avenir Next", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #161b20;
+    --ink: #e6eaee;
+    --muted: #9aa3ab;
+    --subtle: #7d868e;
+    --accent: #8fb4cc;
+    --accent-hover: #c5d9e6;
+    --surface: #1e252c;
+    --rule: #2c353c;
+    --selection: #2c4452;
+    --quote-bar: #4d5e68;
+    --input-border: #3a444c;
+    --on-ink: #161b20;
+  }
 }

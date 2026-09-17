@@ -1,5 +1,7 @@
 baseURL = 'http://localhost:1314/'
+defaultContentLanguage = 'zh'
 locale = 'zh-CN'
+hasCJKLanguage = true
 title = 'Wimi 的个人空间'
 theme = 'hugo-wimi'
 copyright = 'Wimi'

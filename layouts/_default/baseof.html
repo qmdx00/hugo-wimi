@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="{{ site.Language.Locale }}">
+<html lang="{{ or site.Language.Locale site.Language.LanguageCode site.Language.Lang }}">
 <head>
   {{ partial "head.html" . }}
 </head>
 <body class="page-kind-{{ .Kind }}{{ with .Section }} page-section-{{ . | urlize }}{{ end }}">
-  <a class="skip-link" href="#main-content">跳转到正文</a>
+  <a class="skip-link" href="#main-content">{{ i18n "skipToContent" }}</a>
   <div class="site-shell">
     {{ partial "header.html" . }}
     <main class="site-main" id="main-content">
@@ -12,12 +12,17 @@
     </main>
     {{ partial "footer.html" . }}
   </div>
-  {{ if eq .Section "photos" }}
+  {{ $photos := eq .Section "photos" }}
+  {{ $comments := and site.Params.comments.enabled (or (and .IsPage (ne .Section "guestbook")) (eq .Section "guestbook")) }}
+  {{ if or $photos $comments }}
+    {{ partial "i18n-js.html" . }}
+  {{ end }}
+  {{ if $photos }}
     {{ with resources.Get "js/gallery.js" | minify | fingerprint }}
       <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
     {{ end }}
   {{ end }}
-  {{ if and site.Params.comments.enabled (or (and .IsPage (ne .Section "guestbook")) (eq .Section "guestbook")) }}
+  {{ if $comments }}
     {{ with resources.Get "js/comments.js" | minify | fingerprint }}
       <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
     {{ end }}

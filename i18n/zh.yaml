@@ -1,0 +1,78 @@
+skipToContent:
+  other: 跳转到正文
+brandHome:
+  other: "{{ . }}，返回首页"
+navLabel:
+  other: 主导航
+recentPosts:
+  other: 近期文章
+allPosts:
+  other: 全部文章
+friendLinks:
+  other: 友情链接
+emptyPosts:
+  other: 暂时没有文章。
+pagination:
+  other: 分页
+prevPage:
+  other: 上一页
+nextPage:
+  other: 下一页
+notFoundTitle:
+  other: 这页暂时不在这里
+notFoundBody:
+  other: 地址可能已经改变，也可能从未存在。
+backHome:
+  other: 返回首页
+toc:
+  other: 目录
+comments:
+  other: 评论
+guestbook:
+  other: 留言
+author:
+  other: 称呼
+website:
+  other: 网站
+optional:
+  other: 选填
+body:
+  other: 内容
+submitComment:
+  other: 提交评论
+submitGuestbook:
+  other: 提交留言
+formNote:
+  other: 提交后经审核展示。请勿填写敏感信息。
+loadingComments:
+  other: 正在加载评论…
+loadMore:
+  other: 加载更多
+viewAlbum:
+  other: 查看相册
+viewAlbumNamed:
+  other: "查看相册：{{ . }}"
+galleryClose:
+  other: 关闭图片
+galleryPrev:
+  other: 上一张
+galleryNext:
+  other: 下一张
+galleryPreviewFormat:
+  other: "预览图片：%s"
+galleryPhoto:
+  other: 照片
+commentsLoadError:
+  other: 无法加载评论
+commentsEmpty:
+  other: 还没有留言，欢迎留下第一条。
+commentsUnavailable:
+  other: 评论暂时不可用，文章仍可正常阅读。
+commentsSubmitting:
+  other: 正在提交…
+commentsSubmitFail:
+  other: 提交失败
+commentsSubmitted:
+  other: 提交成功，审核通过后会显示。
+commentCountFormat:
+  other: "%s 条"

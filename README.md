@@ -7,8 +7,10 @@
 需要 Hugo 0.166.0 或更新版本。在主题仓库运行：
 
 ```sh
-hugo server --source exampleSite --themesDir .. --port 1314
+hugo server --source exampleSite --themesDir "$(dirname "$PWD")" --port 1314
 ```
+
+CI 会用同样的 `themesDir` 对 `exampleSite` 做一次 `--minify` 构建，确认主题能独立产出站点。
 
 示例站点在 `exampleSite/`，包含完整的 `hugo.toml` 配置以及文章、相册、留言内容。部署自己的站点时，把本仓库作为 `themes/hugo-wimi` 子模块，并在站点配置中设置 `theme = 'hugo-wimi'`。
 
@@ -55,6 +57,7 @@ photos:
 
 ```toml
 baseURL = 'https://wimi.space/'
+defaultContentLanguage = 'zh'
 locale = 'zh-CN'
 title = 'Wimi 的个人空间'
 theme = 'hugo-wimi'
@@ -102,12 +105,14 @@ theme = 'hugo-wimi'
   weight = 40
 ```
 
-`turnstileSiteKey` 是公开的站点密钥；私密密钥只配置在 Cloudflare Pages 环境变量中。没有评论 API 时，将 `comments.enabled` 设为 `false`，其余页面仍可正常使用。
+`turnstileSiteKey` 是公开的站点密钥；私密密钥只配置在 Cloudflare Pages 环境变量中。本主题只约定评论 API 的请求形状，不包含 Worker 或 Pages Function。没有评论服务时，将 `comments.enabled` 设为 `false`，其余页面仍可正常使用。
+
+界面文案在主题的 `i18n/zh.yaml` 与 `i18n/en.yaml`。站点 `defaultContentLanguage` 设为 `en` 即可切换英文界面；菜单名与文章内容仍由站点自己提供。
 
 ## R2 图片
 
-推荐为 R2 存储桶配置自有域名，并填入 `params.photos.baseURL`。照片对象使用不可变的路径；更新图片时换对象名，预览图可以设置较长的缓存时间。主题不依赖 Cloudflare Image Resizing，因此没有启用该服务也能运行。已有 Markdown 图片仍可正常显示；旧 `gallery` shortcode 可暂时使用，但新相册建议使用 `photos` 数据字段。
+推荐为 R2 存储桶配置自有域名，并填入 `params.photos.baseURL`。照片对象使用不可变的路径；更新图片时换对象名，预览图可以设置较长的缓存时间。主题不依赖 Cloudflare Image Resizing，因此没有启用该服务也能运行。文章里的 Markdown 图片和 `figure` shortcode 会走同一套 URL 规则：完整 `http(s)` 地址保持不变，相对路径会拼上 `params.photos.baseURL`。旧 `gallery` shortcode 可暂时使用，但新相册建议使用 `photos` 数据字段。
 
 ## 样式与脚本
 
-样式分为 `assets/css/tokens.css`、`base.css`、`layout.css`、`content.css`、`gallery.css`、`comments.css`，由 Hugo Pipes 合并、压缩并生成指纹。相册与评论脚本只在对应页面加载。链接默认无下划线，键盘聚焦仍有可见轮廓。
+样式分为 `assets/css/tokens.css`、`base.css`、`layout.css`、`content.css`、`gallery.css`、`comments.css`，由 Hugo Pipes 合并、压缩并生成指纹。颜色写在 token 里，并跟随系统的 `prefers-color-scheme` 切换浅色 / 深色。相册与评论脚本只在对应页面加载。链接默认无下划线，键盘聚焦仍有可见轮廓。

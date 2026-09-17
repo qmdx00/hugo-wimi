@@ -1,5 +1,12 @@
 "use strict";
 
+function messages() {
+  const node = document.getElementById("wimi-i18n");
+  return node ? node.dataset : {};
+}
+
+const msg = messages();
+
 for (const root of document.querySelectorAll("[data-comments]")) {
   const api = root.dataset.apiBase;
   const pageKey = root.dataset.pageKey;
@@ -37,21 +44,21 @@ for (const root of document.querySelectorAll("[data-comments]")) {
       url.searchParams.set("page", pageKey);
       if (append && cursor) url.searchParams.set("cursor", cursor);
       const response = await fetch(url, { headers: { Accept: "application/json" } });
-      if (!response.ok) throw new Error("无法加载评论");
+      if (!response.ok) throw new Error(msg.loadError || "无法加载评论");
       const result = await response.json();
       if (!append) list.replaceChildren();
       for (const comment of result.items) list.append(entry(comment));
       if (!result.items.length && !append) {
         const empty = document.createElement("p");
         empty.className = "empty-state";
-        empty.textContent = "还没有留言，欢迎留下第一条。";
+        empty.textContent = msg.empty || "还没有留言，欢迎留下第一条。";
         list.append(empty);
       }
-      count.textContent = result.total ? `${result.total} 条` : "";
+      count.textContent = result.total ? (msg.count || "%s 条").replace("%s", result.total) : "";
       cursor = result.nextCursor;
       more.hidden = !cursor;
     } catch {
-      if (!append) list.textContent = "评论暂时不可用，文章仍可正常阅读。";
+      if (!append) list.textContent = msg.unavailable || "评论暂时不可用，文章仍可正常阅读。";
       more.hidden = true;
     }
   }
@@ -62,7 +69,7 @@ for (const root of document.querySelectorAll("[data-comments]")) {
     const button = form.querySelector('button[type="submit"]');
     const data = new FormData(form);
     button.disabled = true;
-    status.textContent = "正在提交…";
+    status.textContent = msg.submitting || "正在提交…";
     try {
       const response = await fetch(api, {
         method: "POST",
@@ -76,9 +83,9 @@ for (const root of document.querySelectorAll("[data-comments]")) {
         }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "提交失败");
+      if (!response.ok) throw new Error(result.error || msg.submitFail || "提交失败");
       form.reset();
-      status.textContent = "提交成功，审核通过后会显示。";
+      status.textContent = msg.submitted || "提交成功，审核通过后会显示。";
     } catch (error) {
       status.textContent = error.message;
     } finally {

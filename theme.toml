@@ -4,7 +4,7 @@ licenselink = "https://github.com/qmdx00/hugo-wimi/blob/master/LICENSE"
 description = "A quiet, editorial Hugo theme for writing and photography."
 homepage = "https://github.com/qmdx00/hugo-wimi"
 tags = ["blog", "minimal", "photography", "responsive"]
-features = ["articles", "albums", "taxonomies", "guestbook", "comments"]
+features = ["articles", "albums", "taxonomies", "guestbook", "comments", "i18n", "dark-mode"]
 min_version = "0.166.0"
 
 [author]

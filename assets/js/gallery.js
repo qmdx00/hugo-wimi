@@ -1,15 +1,35 @@
 "use strict";
 
+function messages() {
+  const node = document.getElementById("wimi-i18n");
+  return node ? node.dataset : {};
+}
+
 const galleries = document.querySelectorAll("[data-gallery], .gallery");
 
 if (galleries.length) {
+  const msg = messages();
   const dialog = document.createElement("dialog");
   dialog.className = "image-dialog";
-  dialog.innerHTML = '<button type="button" class="image-dialog-close" aria-label="关闭图片">×</button><button type="button" class="image-dialog-prev" aria-label="上一张">‹</button><img alt=""><button type="button" class="image-dialog-next" aria-label="下一张">›</button><p class="image-dialog-caption"></p>';
-  document.body.append(dialog);
 
-  const image = dialog.querySelector("img");
-  const caption = dialog.querySelector(".image-dialog-caption");
+  function dialogButton(className, label, text) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = className;
+    button.setAttribute("aria-label", label);
+    button.textContent = text;
+    return button;
+  }
+
+  const closeButton = dialogButton("image-dialog-close", msg.galleryClose || "关闭图片", "×");
+  const prevButton = dialogButton("image-dialog-prev", msg.galleryPrev || "上一张", "‹");
+  const nextButton = dialogButton("image-dialog-next", msg.galleryNext || "下一张", "›");
+  const image = document.createElement("img");
+  image.alt = "";
+  const caption = document.createElement("p");
+  caption.className = "image-dialog-caption";
+  dialog.append(closeButton, prevButton, image, nextButton, caption);
+  document.body.append(dialog);
   let items = [];
   let current = 0;
   let opener = null;
@@ -27,7 +47,8 @@ if (galleries.length) {
     for (const item of images) {
       item.tabIndex = 0;
       item.setAttribute("role", "button");
-      item.setAttribute("aria-label", `预览图片：${item.alt || "照片"}`);
+      const label = (msg.galleryPreview || "预览图片：%s").replace("%s", item.alt || msg.galleryPhoto || "照片");
+      item.setAttribute("aria-label", label);
       const open = () => {
         items = images;
         opener = item;
@@ -44,9 +65,9 @@ if (galleries.length) {
     }
   }
 
-  dialog.querySelector(".image-dialog-close").addEventListener("click", () => dialog.close());
-  dialog.querySelector(".image-dialog-prev").addEventListener("click", () => show(current - 1));
-  dialog.querySelector(".image-dialog-next").addEventListener("click", () => show(current + 1));
+  closeButton.addEventListener("click", () => dialog.close());
+  prevButton.addEventListener("click", () => show(current - 1));
+  nextButton.addEventListener("click", () => show(current + 1));
   dialog.addEventListener("click", event => {
     if (event.target === dialog) dialog.close();
   });

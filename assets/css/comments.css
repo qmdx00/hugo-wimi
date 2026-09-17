@@ -2,18 +2,18 @@
 .comment-form { margin: 1.5rem 0 3rem; }
 .comment-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .comment-form label { display: block; color: var(--muted); font: .78rem/1.5 var(--font-ui); }
-.comment-form input, .comment-form textarea { display: block; width: 100%; margin-top: .45rem; padding: .7rem .8rem; border: 1px solid #dce2e6; border-radius: 2px; background: var(--paper); color: var(--ink); font: .92rem/1.6 var(--font-ui); }
+.comment-form input, .comment-form textarea { display: block; width: 100%; margin-top: .45rem; padding: .7rem .8rem; border: 1px solid var(--input-border); border-radius: 2px; background: var(--paper); color: var(--ink); font: .92rem/1.6 var(--font-ui); }
 .comment-form textarea { min-height: 8rem; resize: vertical; }
 .comment-message { margin-top: 1rem; }
 .optional { color: var(--subtle); }
 .comment-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1rem; }
-.comment-actions button, .load-more { padding: .6rem 1.15rem; border: 1px solid var(--ink); border-radius: 2px; background: var(--ink); color: #fff; font: .83rem var(--font-ui); }
+.comment-actions button, .load-more { padding: .6rem 1.15rem; border: 1px solid var(--ink); border-radius: 2px; background: var(--ink); color: var(--on-ink); font: .83rem var(--font-ui); }
 .comment-actions button:hover, .load-more:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .comment-actions button:disabled { opacity: .5; cursor: wait; }
 .form-note, .form-status { margin: .55rem 0 0; color: var(--subtle); font: .75rem/1.6 var(--font-ui); }
 .form-status:not(:empty) { color: var(--accent); }
 .comment-entry { padding: 1.4rem 0; border-top: 1px solid var(--rule); }
-.comment-entry header { display: flex; align-items: baseline; gap: .8rem; font: .78rem var(--font-ui); }
+.comment-entry-header { display: flex; align-items: baseline; gap: .8rem; font: .78rem var(--font-ui); }
 .comment-entry strong { color: var(--ink); font-weight: 600; }
 .comment-entry time { color: var(--subtle); }
 .comment-entry p { margin: .7rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .93rem; line-height: 1.8; }

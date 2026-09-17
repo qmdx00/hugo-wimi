@@ -1,0 +1,78 @@
+skipToContent:
+  other: Skip to content
+brandHome:
+  other: "{{ . }}, back to home"
+navLabel:
+  other: Main navigation
+recentPosts:
+  other: Recent posts
+allPosts:
+  other: All posts
+friendLinks:
+  other: Links
+emptyPosts:
+  other: No posts yet.
+pagination:
+  other: Pagination
+prevPage:
+  other: Previous
+nextPage:
+  other: Next
+notFoundTitle:
+  other: This page is not here
+notFoundBody:
+  other: The address may have changed, or it may never have existed.
+backHome:
+  other: Back to home
+toc:
+  other: Contents
+comments:
+  other: Comments
+guestbook:
+  other: Guestbook
+author:
+  other: Name
+website:
+  other: Website
+optional:
+  other: optional
+body:
+  other: Message
+submitComment:
+  other: Submit comment
+submitGuestbook:
+  other: Submit
+formNote:
+  other: Comments appear after review. Do not include sensitive information.
+loadingComments:
+  other: Loading comments…
+loadMore:
+  other: Load more
+viewAlbum:
+  other: View album
+viewAlbumNamed:
+  other: "View album: {{ . }}"
+galleryClose:
+  other: Close image
+galleryPrev:
+  other: Previous image
+galleryNext:
+  other: Next image
+galleryPreviewFormat:
+  other: "Preview image: %s"
+galleryPhoto:
+  other: photo
+commentsLoadError:
+  other: Could not load comments
+commentsEmpty:
+  other: No comments yet. Be the first.
+commentsUnavailable:
+  other: Comments are temporarily unavailable. The page is still readable.
+commentsSubmitting:
+  other: Submitting…
+commentsSubmitFail:
+  other: Could not submit
+commentsSubmitted:
+  other: Submitted. It will appear after review.
+commentCountFormat:
+  other: "%s"
