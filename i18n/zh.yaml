@@ -64,6 +64,8 @@ galleryPreviewFormat:
   other: "预览图片：%s"
 galleryPhoto:
   other: 照片
+photoCount:
+  other: "{{ . }} 张照片"
 galleryCounterFormat:
   other: "%s / %s"
 commentsLoadError:
@@ -83,6 +85,8 @@ commentCountFormat:
 
 colorModeToggle:
   other: 切换颜色模式
+colorModeButton:
+  other: 主题
 colorModeSystem:
   other: 系统
 colorModeLight:

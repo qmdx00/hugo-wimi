@@ -64,6 +64,8 @@ galleryPreviewFormat:
   other: "Preview image: %s"
 galleryPhoto:
   other: photo
+photoCount:
+  other: "{{ . }} photos"
 galleryCounterFormat:
   other: "%s / %s"
 commentsLoadError:
@@ -83,6 +85,8 @@ commentCountFormat:
 
 colorModeToggle:
   other: Toggle color mode
+colorModeButton:
+  other: Theme
 colorModeSystem:
   other: System
 colorModeLight:

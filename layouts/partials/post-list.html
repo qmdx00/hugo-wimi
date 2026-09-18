@@ -3,6 +3,9 @@
     <li>
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006/01/02") }}</time>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ $excerpt := .Description | plainify | strings.TrimSpace }}
+      {{ if not $excerpt }}{{ $excerpt = index (split (.Summary | plainify | strings.TrimSpace) "\n") 0 }}{{ end }}
+      {{ with $excerpt }}<p class="excerpt">{{ . | truncate 130 }}</p>{{ end }}
     </li>
   {{ else }}
     <li class="empty-state">{{ i18n "emptyPosts" }}</li>

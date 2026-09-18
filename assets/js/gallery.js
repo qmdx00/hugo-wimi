@@ -50,34 +50,36 @@ if (galleries.length) {
   function show(index) {
     current = (index + items.length) % items.length;
     const source = items[current];
-    image.src = source.dataset.full || source.currentSrc || source.src;
-    image.alt = source.alt || "";
-    caption.textContent = source.closest("figure")?.querySelector("figcaption")?.textContent || source.alt || "";
+    const thumb = source.tagName === "IMG" ? source : source.querySelector("img");
+    image.src = source.dataset.full || thumb?.dataset.full || thumb?.currentSrc || thumb?.src || "";
+    image.alt = thumb?.alt || "";
+    caption.textContent = source.closest("figure")?.querySelector("figcaption")?.textContent || thumb?.alt || "";
     counter.textContent = formatCounter(current + 1, items.length);
     counter.hidden = items.length < 1;
     updateNav();
   }
 
   for (const gallery of galleries) {
-    const images = [...gallery.querySelectorAll("figure img")];
-    for (const item of images) {
-      item.tabIndex = 0;
-      item.setAttribute("role", "button");
-      const label = (msg.galleryPreview || "预览图片：%s").replace("%s", item.alt || msg.galleryPhoto || "照片");
+    const triggers = [...gallery.querySelectorAll("figure button[data-full], figure img")]
+      .filter(item => item.tagName !== "IMG" || !item.closest("button[data-full]"));
+    for (const item of triggers) {
+      const thumb = item.tagName === "IMG" ? item : item.querySelector("img");
+      if (item.tagName === "IMG") {
+        item.tabIndex = 0;
+        item.setAttribute("role", "button");
+      }
+      const label = (msg.galleryPreview || "预览图片：%s").replace("%s", thumb?.alt || msg.galleryPhoto || "照片");
       item.setAttribute("aria-label", label);
       const open = () => {
-        items = images;
+        items = triggers;
         opener = item;
-        show(images.indexOf(item));
+        show(triggers.indexOf(item));
         document.body.style.overflow = "hidden";
         dialog.showModal();
       };
       item.addEventListener("click", open);
-      item.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          open();
-        }
+      if (item.tagName === "IMG") item.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(); }
       });
     }
   }
@@ -90,8 +92,8 @@ if (galleries.length) {
   });
   dialog.addEventListener("keydown", event => {
     if (items.length < 2) return;
-    if (event.key === "ArrowLeft") show(current - 1);
-    if (event.key === "ArrowRight") show(current + 1);
+    if (event.key === "ArrowLeft") { event.preventDefault(); show(current - 1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); show(current + 1); }
   });
   dialog.addEventListener("close", () => {
     image.removeAttribute("src");

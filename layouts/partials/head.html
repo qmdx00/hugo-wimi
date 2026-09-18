@@ -29,7 +29,7 @@
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $description }}">
 {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .RelPermalink }}">{{ end }}
-{{- $photosRelated := or .IsHome (eq .Section "photos") -}}
+{{- $photosRelated := eq .Section "photos" -}}
 {{- with site.Params.photos.baseURL -}}
   {{- if $photosRelated -}}
     {{- $u := urls.Parse . -}}

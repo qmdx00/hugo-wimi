@@ -54,7 +54,7 @@ photos:
 散步时拍下的一些风景。
 ```
 
-`src` 是大图，`preview` 是照片墙用图，二者都可以是 R2 域名下的对象路径或完整 URL。省略 `preview` 时会直接使用原图；省略 `cover` 时相册列表使用第一张照片的预览图。可选 `srcset` / `sizes`（原样写入 `<img>`）；未写 `sizes` 时相册详情与列表默认 `(max-width: 640px) 100vw, 50vw`。建议上传约 960 像素宽的预览图、保留原图，并填写原图宽高；浏览器据此预留比例，避免滚动时布局跳动。主题不会在构建阶段下载远程照片。
+`src` 是大图，`preview` 是照片墙用图，二者都可以是 R2 域名下的对象路径或完整 URL。省略 `preview` 时会直接使用原图；省略 `cover` 时相册列表使用第一张照片的预览图。可选 `srcset` / `sizes`（原样写入 `<img>`）；未写 `sizes` 时相册列表与详情默认按手机一列、平板两列、桌面三列设置。照片墙保留图片原始比例，建议上传约 960 像素宽的预览图并填写宽高，减少加载时的布局跳动。主题不会在构建阶段下载远程照片。
 
 ## 主要配置
 
@@ -73,10 +73,11 @@ theme = 'hugo-wimi'
   description = '关于技术、生活和那些值得记录的瞬间。'
   dateFormat = '2006/01/02'
   footer = '用 Hugo 构建。'
-  colorMode = 'system'   # system | light | dark
+  colorMode = 'dark'   # system | light | dark
   # ogImage = 'https://wimi.space/og.png'  # 无封面时的 OG / Twitter 图
 
   [params.home]
+    heading = 'Wimi'
     intro = '写一些关于技术和生活的文字。'
     recentPosts = 8
 
@@ -95,16 +96,16 @@ theme = 'hugo-wimi'
     turnstileSiteKey = 'YOUR_PUBLIC_SITE_KEY'
 
 [[menu.main]]
-  name = '文章'
-  pageRef = '/posts'
+  name = '首页'
+  pageRef = '/'
   weight = 10
-[[menu.main]]
-  name = '标签'
-  pageRef = '/tags'
-  weight = 20
 [[menu.main]]
   name = '相册'
   pageRef = '/photos'
+  weight = 20
+[[menu.main]]
+  name = '文章'
+  pageRef = '/posts'
   weight = 30
 [[menu.main]]
   name = '留言'
@@ -118,8 +119,9 @@ theme = 'hugo-wimi'
 |------|------|
 | `defaultContentLanguage` | 界面语言（`zh` / `en`）。菜单与正文内容仍由站点提供。 |
 | `params.colorMode` | 初始颜色模式：`system`（默认）、`light`、`dark`。访客可用页头按钮在三者间循环；选择写入 `localStorage` 键 `wimi-color-mode`。 |
+| `params.home.heading` | 首页标题；未设置时使用站点 `title`。首页不自动插入照片。 |
 | `params.ogImage` | 页面无封面 / 首图时的 Open Graph / Twitter 图（绝对 URL 或站内路径）。 |
-| `params.photos.baseURL` | 相对路径图片前缀；相册相关页（含首页）会对主机发出 `preconnect` / `dns-prefetch`。 |
+| `params.photos.baseURL` | 相对路径图片前缀；相册页会对图片主机发出 `preconnect` / `dns-prefetch`。 |
 | `params.comments.enabled` | 是否启用评论 / 留言。单页可用 `comments: false` 关闭。 |
 | `params.comments.apiBase` | 评论 API 路径，默认 `/api/comments`。 |
 | `params.comments.turnstileSiteKey` | Cloudflare Turnstile 公开站点密钥。 |
@@ -147,9 +149,10 @@ theme = 'hugo-wimi'
 | 资源 | 何时加载 |
 |------|----------|
 | `tokens` + `base` + `layout` + `content` | 全站基础 CSS 包 |
-| `gallery.css` / `gallery.js` | 相册详情页（`section=photos` 且 `IsPage`），列表页不加载 |
+| `gallery.css` | 相册列表与详情页 |
+| `gallery.js` | 相册详情页的全屏灯箱 |
 | `comments.css` / `comments.js` | 评论启用且当前页会渲染评论区时 |
 | `theme.js` | 全站（小体积，defer） |
 | `i18n-js` 数据节点 | 相册详情或评论页 |
 
-颜色 token 支持系统 `prefers-color-scheme`，以及 `html[data-theme=light|dark]` 覆盖。页头有防闪烁内联脚本读取 `wimi-color-mode`。Open Graph / Twitter 卡片使用页面封面、相册首图或 `params.ogImage`（绝对 URL）。链接默认无下划线，键盘聚焦仍有可见轮廓。
+首页、文章、标签与留言使用窄版心纸面；相册列表与详情使用圆角自适应照片墙。颜色 token 支持系统 `prefers-color-scheme`，以及 `html[data-theme=light|dark]` 覆盖。页头有防闪烁内联脚本读取 `wimi-color-mode`。Open Graph / Twitter 卡片使用页面封面、相册首图或 `params.ogImage`（绝对 URL）。正文链接有下划线，键盘聚焦保留可见轮廓。

@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="reading-width listing-page">
+<div class="reading-width listing-page paper-wrap">
   <header class="page-heading">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-lead">{{ . }}</div>{{ else }}{{ with .Description }}<p class="page-lead">{{ . }}</p>{{ end }}{{ end }}

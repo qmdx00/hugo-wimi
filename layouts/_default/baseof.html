@@ -7,7 +7,7 @@
   <a class="skip-link" href="#main-content">{{ i18n "skipToContent" }}</a>
   <div class="site-shell">
     {{ partial "header.html" . }}
-    <main class="site-main" id="main-content">
+    <main class="site-main {{ if eq .Section "photos" }}surface-photo{{ else }}surface-paper{{ end }}" id="main-content">
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}

@@ -1,37 +1,37 @@
 {{ define "main" }}
-<div class="gallery-width album-index">
-  <header class="page-heading">
+<div class="gallery-width album-index photo-wrap">
+  <header class="page-heading photo-page-heading">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-lead">{{ . }}</div>{{ else }}{{ with .Description }}<p class="page-lead">{{ . }}</p>{{ end }}{{ end }}
   </header>
   {{ $paginator := .Paginate .RegularPages.ByDate.Reverse }}
-  <div class="album-grid">
+  <div class="album-grid masonry">
     {{ range $paginator.Pages }}
       {{ $cover := partial "photo-cover.html" . }}
       {{ $first := dict }}
       {{ with .Params.photos }}{{ $first = index . 0 }}{{ end }}
-      {{ $sizes := $first.sizes | default "(max-width: 640px) 100vw, 50vw" }}
-      <article class="album-card">
-        <a class="album-image-link" href="{{ .RelPermalink }}" aria-label="{{ i18n "viewAlbumNamed" .Title }}">
+      {{ $sizes := $first.sizes | default "(max-width: 560px) 100vw, (max-width: 960px) 50vw, 33vw" }}
+      <a class="album-card" href="{{ .RelPermalink }}" aria-label="{{ i18n "viewAlbumNamed" .Title }}">
+        <div class="card-media">
           {{ if $cover }}
             <img
               src="{{ $cover }}"
-              {{ with $first.srcset }}srcset="{{ . }}"{{ end }}
+              {{ if not .Params.cover }}{{ with $first.srcset }}srcset="{{ . }}"{{ end }}{{ end }}
               sizes="{{ $sizes }}"
               alt=""
-              {{ with $first.width }}width="{{ . }}"{{ end }}
-              {{ with $first.height }}height="{{ . }}"{{ end }}
+              {{ if not .Params.cover }}{{ with $first.width }}width="{{ . }}"{{ end }}{{ with $first.height }}height="{{ . }}"{{ end }}{{ end }}
               loading="lazy"
               decoding="async">
           {{ else }}
             <span class="album-placeholder">{{ i18n "viewAlbum" }}</span>
           {{ end }}
-        </a>
-        <div class="album-caption">
-          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006/01/02") }}</time>
+          {{ with .Params.photos }}<span class="album-count" aria-hidden="true">{{ len . }}</span>{{ end }}
         </div>
-      </article>
+        <div class="album-caption">
+          <h2>{{ .Title }}</h2>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+        </div>
+      </a>
     {{ end }}
   </div>
   {{ partial "pagination.html" $paginator }}

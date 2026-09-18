@@ -2,7 +2,7 @@
 
 (function () {
   const KEY = "wimi-color-mode";
-  const ORDER = ["system", "light", "dark"];
+  const ORDER = ["system", "dark", "light"];
   const root = document.documentElement;
   const labelNode = document.querySelector("[data-theme-label]");
   const button = document.querySelector("[data-theme-toggle]");
@@ -35,8 +35,7 @@
 
   function persist(mode) {
     try {
-      if (mode === "system") localStorage.removeItem(KEY);
-      else localStorage.setItem(KEY, mode);
+      localStorage.setItem(KEY, mode);
     } catch (e) {}
   }
 

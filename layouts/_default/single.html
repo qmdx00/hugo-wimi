@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article class="article reading-width">
+<article class="article reading-width paper-wrap">
   {{ partial "article-header.html" . }}
   {{ if and .Params.toc (gt (len .TableOfContents) 0) }}
     <details class="toc"{{ if site.Params.article.tocOpen }} open{{ end }}>

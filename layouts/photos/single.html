@@ -1,25 +1,28 @@
 {{ define "main" }}
-<article class="album-detail gallery-width">
-  {{ partial "article-header.html" . }}
-  <div class="prose album-prose">{{ .Content }}</div>
+<article class="album-detail gallery-width photo-wrap">
+  <header class="album-head">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="album-prose">{{ . }}</div>{{ else }}{{ with .Description }}<p class="album-prose">{{ . }}</p>{{ end }}{{ end }}
+    <p class="album-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006/01/02") }}</time>{{ with .Params.photos }}<span aria-hidden="true"> · </span>{{ i18n "photoCount" (len .) }}{{ end }}</p>
+  </header>
   {{ with .Params.photos }}
-    <div class="photo-gallery" data-gallery>
+    <div class="photo-gallery masonry" data-gallery>
       {{ range . }}
         {{ $full := partial "photo-url.html" .src }}
         {{ $preview := partial "photo-url.html" (.preview | default .src) }}
-        {{ $sizes := .sizes | default "(max-width: 640px) 100vw, 50vw" }}
-        <figure>
-          <img
-            src="{{ $preview }}"
-            {{ with .srcset }}srcset="{{ . }}"{{ end }}
-            sizes="{{ $sizes }}"
-            data-full="{{ $full }}"
-            alt="{{ .alt | default "" }}"
-            {{ with .width }}width="{{ . }}"{{ end }}
-            {{ with .height }}height="{{ . }}"{{ end }}
-            {{ if and .width .height }}style="aspect-ratio: {{ .width }} / {{ .height }}"{{ end }}
-            loading="lazy"
-            decoding="async">
+        {{ $sizes := .sizes | default "(max-width: 560px) 100vw, (max-width: 960px) 50vw, 33vw" }}
+        <figure class="photo-item">
+          <button type="button" class="photo-card" data-full="{{ $full }}">
+            <img
+              src="{{ $preview }}"
+              {{ with .srcset }}srcset="{{ . }}"{{ end }}
+              sizes="{{ $sizes }}"
+              alt="{{ .alt | default "" }}"
+              {{ with .width }}width="{{ . }}"{{ end }}
+              {{ with .height }}height="{{ . }}"{{ end }}
+              loading="lazy"
+              decoding="async">
+          </button>
           {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
         </figure>
       {{ end }}

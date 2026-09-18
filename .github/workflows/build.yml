@@ -20,14 +20,21 @@ jobs:
           test -f /tmp/wimi-site/index.html
           test -d /tmp/wimi-site/posts
           test -d /tmp/wimi-site/photos
-          # Base CSS bundle always present
-          grep -Rql 'wimi\.' /tmp/wimi-site/index.html
-          # Gallery CSS/JS only on photo detail, not list
+          # The home page is text only; the photo surface begins at /photos.
+          grep -q 'surface-paper' /tmp/wimi-site/index.html
+          ! grep -q '<img' /tmp/wimi-site/index.html
+          grep -q 'surface-photo' /tmp/wimi-site/photos/index.html
+          grep -q 'album-card' /tmp/wimi-site/photos/index.html
+          grep -q '/css/gallery' /tmp/wimi-site/photos/index.html
+          ! grep -q '/js/gallery' /tmp/wimi-site/photos/index.html
+          # Gallery interactions load only on photo detail.
           PHOTO_DETAIL=$(find /tmp/wimi-site/photos -mindepth 2 -name index.html | head -1)
           test -n "$PHOTO_DETAIL"
-          grep -q 'gallery' "$PHOTO_DETAIL"
+          grep -q 'photo-card' "$PHOTO_DETAIL"
+          grep -q '/css/gallery' "$PHOTO_DETAIL"
+          grep -q '/js/gallery' "$PHOTO_DETAIL"
           # Theme script sitewide
-          grep -q 'theme' /tmp/wimi-site/index.html
+          grep -q '/js/theme' /tmp/wimi-site/index.html
           # Comments assets on guestbook when enabled
-          grep -q 'comments' /tmp/wimi-site/guestbook/index.html
+          grep -q '/js/comments' /tmp/wimi-site/guestbook/index.html
           echo "smoke ok"
