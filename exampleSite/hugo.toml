@@ -28,6 +28,10 @@ copyright = 'Wimi'
   description = '关于技术、生活和那些值得记录的瞬间。'
   dateFormat = '2006/01/02'
   footer = '用 Hugo 构建，安静地写作。'
+  # system | light | dark — initial preference; visitors can cycle via the header toggle
+  colorMode = 'system'
+  # Optional absolute or site-relative image used when a page has no cover/photo
+  # ogImage = '/og-default.png'
 
   [params.home]
     intro = '写一些关于技术、生活的文字，也收藏那些值得记住的瞬间。'
@@ -42,6 +46,7 @@ copyright = 'Wimi'
     showAuthor = true
     showTaxonomies = true
 
+  # Demo only — wire Pages Functions + D1 + Turnstile + Access for production
   [params.comments]
     enabled = true
     apiBase = '/api/comments'

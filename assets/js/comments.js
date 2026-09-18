@@ -6,6 +6,22 @@ function messages() {
 }
 
 const msg = messages();
+let turnstileLoading = null;
+
+function loadTurnstile() {
+  if (window.turnstile) return Promise.resolve();
+  if (turnstileLoading) return turnstileLoading;
+  turnstileLoading = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("turnstile"));
+    document.head.append(script);
+  });
+  return turnstileLoading;
+}
 
 for (const root of document.querySelectorAll("[data-comments]")) {
   const api = root.dataset.apiBase;
@@ -61,6 +77,15 @@ for (const root of document.querySelectorAll("[data-comments]")) {
       if (!append) list.textContent = msg.unavailable || "评论暂时不可用，文章仍可正常阅读。";
       more.hidden = true;
     }
+  }
+
+  if (form && form.querySelector(".cf-turnstile")) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      loadTurnstile().catch(() => {});
+    }, { rootMargin: "200px" });
+    observer.observe(form);
   }
 
   more.addEventListener("click", () => load(true));

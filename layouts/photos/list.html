@@ -8,10 +8,21 @@
   <div class="album-grid">
     {{ range $paginator.Pages }}
       {{ $cover := partial "photo-cover.html" . }}
+      {{ $first := dict }}
+      {{ with .Params.photos }}{{ $first = index . 0 }}{{ end }}
+      {{ $sizes := $first.sizes | default "(max-width: 640px) 100vw, 50vw" }}
       <article class="album-card">
         <a class="album-image-link" href="{{ .RelPermalink }}" aria-label="{{ i18n "viewAlbumNamed" .Title }}">
           {{ if $cover }}
-            <img src="{{ $cover }}" alt="" loading="lazy" decoding="async">
+            <img
+              src="{{ $cover }}"
+              {{ with $first.srcset }}srcset="{{ . }}"{{ end }}
+              sizes="{{ $sizes }}"
+              alt=""
+              {{ with $first.width }}width="{{ . }}"{{ end }}
+              {{ with $first.height }}height="{{ . }}"{{ end }}
+              loading="lazy"
+              decoding="async">
           {{ else }}
             <span class="album-placeholder">{{ i18n "viewAlbum" }}</span>
           {{ end }}

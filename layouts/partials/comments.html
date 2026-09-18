@@ -25,7 +25,4 @@
     <div class="comment-list" data-comment-list aria-live="polite"><p class="empty-state">{{ i18n "loadingComments" }}</p></div>
     <button class="load-more" data-load-more type="button" hidden>{{ i18n "loadMore" }}</button>
   </section>
-  {{ with site.Params.comments.turnstileSiteKey }}
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  {{ end }}
 {{ end }}

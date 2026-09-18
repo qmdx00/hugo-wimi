@@ -1,2 +1,9 @@
 {{- $src := partial "photo-url.html" .Destination -}}
-<img src="{{ $src }}" alt="{{ .Text | default "" }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- $sizes := "(max-width: 640px) 100vw, 44rem" -}}
+<img
+  src="{{ $src }}"
+  sizes="{{ $sizes }}"
+  alt="{{ .Text | default "" }}"
+  {{ with .Title }}title="{{ . }}"{{ end }}
+  loading="lazy"
+  decoding="async">

@@ -34,12 +34,19 @@ if (galleries.length) {
   let current = 0;
   let opener = null;
 
+  function updateNav() {
+    const multi = items.length > 1;
+    prevButton.hidden = !multi;
+    nextButton.hidden = !multi;
+  }
+
   function show(index) {
     current = (index + items.length) % items.length;
     const source = items[current];
     image.src = source.dataset.full || source.currentSrc || source.src;
     image.alt = source.alt || "";
     caption.textContent = source.closest("figure")?.querySelector("figcaption")?.textContent || source.alt || "";
+    updateNav();
   }
 
   for (const gallery of galleries) {
@@ -53,6 +60,7 @@ if (galleries.length) {
         items = images;
         opener = item;
         show(images.indexOf(item));
+        document.body.style.overflow = "hidden";
         dialog.showModal();
       };
       item.addEventListener("click", open);
@@ -72,11 +80,13 @@ if (galleries.length) {
     if (event.target === dialog) dialog.close();
   });
   dialog.addEventListener("keydown", event => {
+    if (items.length < 2) return;
     if (event.key === "ArrowLeft") show(current - 1);
     if (event.key === "ArrowRight") show(current + 1);
   });
   dialog.addEventListener("close", () => {
     image.removeAttribute("src");
+    document.body.style.overflow = "";
     opener?.focus();
   });
 }

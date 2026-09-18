@@ -76,3 +76,12 @@ commentsSubmitted:
   other: Submitted. It will appear after review.
 commentCountFormat:
   other: "%s"
+
+colorModeToggle:
+  other: Toggle color mode
+colorModeSystem:
+  other: System
+colorModeLight:
+  other: Light
+colorModeDark:
+  other: Dark

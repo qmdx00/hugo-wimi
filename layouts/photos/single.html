@@ -7,8 +7,18 @@
       {{ range . }}
         {{ $full := partial "photo-url.html" .src }}
         {{ $preview := partial "photo-url.html" (.preview | default .src) }}
+        {{ $sizes := .sizes | default "(max-width: 640px) 100vw, 50vw" }}
         <figure>
-          <img src="{{ $preview }}" data-full="{{ $full }}" alt="{{ .alt | default "" }}"{{ with .width }} width="{{ . }}"{{ end }}{{ with .height }} height="{{ . }}"{{ end }} loading="lazy" decoding="async">
+          <img
+            src="{{ $preview }}"
+            {{ with .srcset }}srcset="{{ . }}"{{ end }}
+            sizes="{{ $sizes }}"
+            data-full="{{ $full }}"
+            alt="{{ .alt | default "" }}"
+            {{ with .width }}width="{{ . }}"{{ end }}
+            {{ with .height }}height="{{ . }}"{{ end }}
+            loading="lazy"
+            decoding="async">
           {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
         </figure>
       {{ end }}

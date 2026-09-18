@@ -1,7 +1,16 @@
 {{- $src := partial "photo-url.html" (.Get "src") -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" | default "" -}}
+{{- $sizes := .Get "sizes" | default "(max-width: 640px) 100vw, 44rem" -}}
 <figure>
-  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  <img
+    src="{{ $src }}"
+    {{ with .Get "srcset" }}srcset="{{ . }}"{{ end }}
+    sizes="{{ $sizes }}"
+    alt="{{ $alt }}"
+    {{ with .Get "width" }}width="{{ . }}"{{ end }}
+    {{ with .Get "height" }}height="{{ . }}"{{ end }}
+    loading="lazy"
+    decoding="async">
   {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
 </figure>

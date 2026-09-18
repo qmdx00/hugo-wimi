@@ -76,3 +76,12 @@ commentsSubmitted:
   other: 提交成功，审核通过后会显示。
 commentCountFormat:
   other: "%s 条"
+
+colorModeToggle:
+  other: 切换颜色模式
+colorModeSystem:
+  other: 系统
+colorModeLight:
+  other: 浅色
+colorModeDark:
+  other: 深色

@@ -9,15 +9,69 @@
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:url" content="{{ .Permalink }}">
+{{- $ogImage := "" -}}
+{{- with partial "photo-cover.html" . -}}
+  {{- $ogImage = . -}}
+{{- end -}}
+{{- if and (not $ogImage) site.Params.ogImage -}}
+  {{- $ogImage = site.Params.ogImage -}}
+{{- end -}}
+{{- if $ogImage -}}
+  {{- if not (or (strings.HasPrefix $ogImage "https://") (strings.HasPrefix $ogImage "http://")) -}}
+    {{- $ogImage = $ogImage | absURL -}}
+  {{- end -}}
+  <meta property="og:image" content="{{ $ogImage }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ $ogImage }}">
+{{- else -}}
+  <meta name="twitter:card" content="summary">
+{{- end }}
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
 {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .RelPermalink }}">{{ end }}
-{{ $styles := slice
+{{- $photosRelated := or .IsHome (eq .Section "photos") -}}
+{{- with site.Params.photos.baseURL -}}
+  {{- if $photosRelated -}}
+    {{- $u := urls.Parse . -}}
+    {{- with $u.Host -}}
+<link rel="preconnect" href="{{ $u.Scheme }}://{{ . }}" crossorigin>
+<link rel="dns-prefetch" href="//{{ . }}">
+    {{- end -}}
+  {{- end -}}
+{{- end }}
+<script>
+(function () {
+  try {
+    var key = "wimi-color-mode";
+    var stored = localStorage.getItem(key);
+    var pref = document.documentElement.getAttribute("data-theme-pref") || "system";
+    var mode = stored || pref || "system";
+    if (mode === "light" || mode === "dark") {
+      document.documentElement.setAttribute("data-theme", mode);
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+  } catch (e) {}
+})();
+</script>
+{{ $base := slice
   (resources.Get "css/tokens.css")
   (resources.Get "css/base.css")
   (resources.Get "css/layout.css")
   (resources.Get "css/content.css")
-  (resources.Get "css/gallery.css")
-  (resources.Get "css/comments.css")
 }}
-{{ $css := $styles | resources.Concat "css/wimi.css" | minify | fingerprint }}
+{{ $css := $base | resources.Concat "css/wimi.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- $galleryCSS := eq .Section "photos" -}}
+{{- if $galleryCSS -}}
+  {{- with resources.Get "css/gallery.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{- end -}}
+{{- end -}}
+{{- $commentsEnabled := and site.Params.comments.enabled (ne .Params.comments false) (or (and .IsPage (ne .Section "guestbook")) (eq .Section "guestbook")) -}}
+{{- if $commentsEnabled -}}
+  {{- with resources.Get "css/comments.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{- end -}}
+{{- end }}
 {{ with site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}

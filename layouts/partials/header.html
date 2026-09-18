@@ -1,15 +1,27 @@
 {{ $page := . }}
+{{ $mode := site.Params.colorMode | default "system" }}
+{{ $modeLabel := cond (eq $mode "light") (i18n "colorModeLight") (cond (eq $mode "dark") (i18n "colorModeDark") (i18n "colorModeSystem")) }}
 <header class="site-header">
   <a class="site-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ i18n "brandHome" site.Title }}">{{ site.Params.brand | default "wimi" }}</a>
-  <nav class="site-nav" aria-label="{{ i18n "navLabel" }}">
-    <ul>
-      {{ range site.Menus.main }}
-        {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
-        {{ if and (not $active) .Page }}
-          {{ $active = or (eq $page .Page) (and (ne .Page.RelPermalink "/") (strings.HasPrefix $page.RelPermalink .Page.RelPermalink)) }}
+  <div class="site-header-actions">
+    <nav class="site-nav" aria-label="{{ i18n "navLabel" }}">
+      <ul>
+        {{ range site.Menus.main }}
+          {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+          {{ if and (not $active) .Page }}
+            {{ $active = or (eq $page .Page) (and (ne .Page.RelPermalink "/") (strings.HasPrefix $page.RelPermalink .Page.RelPermalink)) }}
+          {{ end }}
+          <li><a href="{{ .URL | relURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
         {{ end }}
-        <li><a href="{{ .URL | relURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
-      {{ end }}
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+    <span id="wimi-theme-i18n" hidden
+      data-toggle="{{ i18n "colorModeToggle" }}"
+      data-system="{{ i18n "colorModeSystem" }}"
+      data-light="{{ i18n "colorModeLight" }}"
+      data-dark="{{ i18n "colorModeDark" }}"></span>
+    <button type="button" class="theme-toggle" data-theme-toggle data-mode="{{ $mode }}" aria-label="{{ i18n "colorModeToggle" }}">
+      <span data-theme-label>{{ $modeLabel }}</span>
+    </button>
+  </div>
 </header>
