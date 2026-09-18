@@ -30,6 +30,8 @@ comments:
   other: 评论
 guestbook:
   other: 留言
+guestbookPreparing:
+  other: 留言功能筹备中
 author:
   other: 称呼
 website:
@@ -62,6 +64,8 @@ galleryPreviewFormat:
   other: "预览图片：%s"
 galleryPhoto:
   other: 照片
+galleryCounterFormat:
+  other: "%s / %s"
 commentsLoadError:
   other: 无法加载评论
 commentsEmpty:

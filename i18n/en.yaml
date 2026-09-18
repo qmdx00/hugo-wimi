@@ -30,6 +30,8 @@ comments:
   other: Comments
 guestbook:
   other: Guestbook
+guestbookPreparing:
+  other: Guestbook is being prepared.
 author:
   other: Name
 website:
@@ -62,6 +64,8 @@ galleryPreviewFormat:
   other: "Preview image: %s"
 galleryPhoto:
   other: photo
+galleryCounterFormat:
+  other: "%s / %s"
 commentsLoadError:
   other: Could not load comments
 commentsEmpty:

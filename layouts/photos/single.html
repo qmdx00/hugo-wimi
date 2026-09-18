@@ -17,6 +17,7 @@
             alt="{{ .alt | default "" }}"
             {{ with .width }}width="{{ . }}"{{ end }}
             {{ with .height }}height="{{ . }}"{{ end }}
+            {{ if and .width .height }}style="aspect-ratio: {{ .width }} / {{ .height }}"{{ end }}
             loading="lazy"
             decoding="async">
           {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}

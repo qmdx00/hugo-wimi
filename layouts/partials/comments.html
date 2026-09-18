@@ -1,7 +1,7 @@
 {{ $enabled := and site.Params.comments.enabled (ne .Params.comments false) }}
+{{ $guestbook := eq .Section "guestbook" }}
 {{ if $enabled }}
   {{ $key := .Params.commentKey | default .RelPermalink }}
-  {{ $guestbook := eq .Section "guestbook" }}
   <section class="comments reading-width" aria-labelledby="comments-heading" data-comments data-page-key="{{ $key }}" data-api-base="{{ site.Params.comments.apiBase | default "/api/comments" }}">
     <div class="section-heading">
       <h2 id="comments-heading">{{ if $guestbook }}{{ i18n "guestbook" }}{{ else }}{{ i18n "comments" }}{{ end }}</h2>
@@ -24,5 +24,12 @@
     </form>
     <div class="comment-list" data-comment-list aria-live="polite"><p class="empty-state">{{ i18n "loadingComments" }}</p></div>
     <button class="load-more" data-load-more type="button" hidden>{{ i18n "loadMore" }}</button>
+  </section>
+{{ else if $guestbook }}
+  <section class="comments reading-width guestbook-empty" aria-labelledby="guestbook-empty-heading">
+    <div class="empty-state-card">
+      <h2 id="guestbook-empty-heading" class="visually-hidden">{{ i18n "guestbook" }}</h2>
+      <p class="empty-state-message">{{ i18n "guestbookPreparing" }}</p>
+    </div>
   </section>
 {{ end }}

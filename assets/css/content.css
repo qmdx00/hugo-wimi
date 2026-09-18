@@ -18,15 +18,32 @@
 .prose a:hover { color: var(--accent-hover); }
 .prose blockquote { margin: 1.8em 0; padding: .1em 0 .1em 1.2em; border-left: 2px solid var(--quote-bar); color: var(--muted); }
 .prose blockquote p:last-child { margin-bottom: 0; }
-.prose pre { overflow-x: auto; margin: 1.6em 0; padding: 1.25rem 1.4rem; background: var(--surface); border-radius: 3px; font: .85rem/1.65 var(--font-mono); }
-.prose :not(pre) > code { padding: .13em .3em; background: var(--surface); border-radius: 2px; font: .85em var(--font-mono); }
+.prose pre {
+  overflow-x: auto;
+  margin: 1.6em 0;
+  padding: 1.25rem 1.4rem;
+  background: var(--code-bg);
+  border-radius: 3px;
+  border-top: 2px solid var(--rule);
+  font: .85rem/1.65 var(--font-mono);
+}
+.prose :not(pre) > code { padding: .13em .3em; background: var(--code-bg); border-radius: 2px; font: .85em var(--font-mono); }
 .prose pre code { font: inherit; }
 .prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: 1.7em 0; font-size: .9rem; }
 .prose th, .prose td { padding: .55em .8em; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
 .prose th { font-weight: 600; }
 .prose img { display: block; margin: 1.8em auto; }
 .prose figcaption { margin: -.8em 0 1.8em; color: var(--subtle); text-align: center; font: .8rem/1.6 var(--font-ui); }
-.toc { margin: 0 0 3rem; padding: 1.2rem 1.5rem; background: var(--surface); border-radius: 3px; color: var(--muted); font: .86rem/1.75 var(--font-ui); }
+.toc {
+  margin: 0 0 3rem;
+  padding: 1.1rem 1.35rem 1.1rem 1.25rem;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--quote-bar);
+  border-radius: 3px;
+  color: var(--muted);
+  font: .86rem/1.75 var(--font-ui);
+}
 .toc summary { color: var(--ink); cursor: pointer; font-weight: 600; }
 .toc nav > ul { margin-top: .8rem; }
 .toc ul { list-style: none; margin: .2rem 0 0; padding-left: 1.1rem; }
@@ -36,4 +53,4 @@
 .toc a:hover { color: var(--accent); }
 .album-prose { margin-bottom: 2.5rem; }
 .album-prose > p, .album-prose > blockquote { max-width: var(--content-width); }
-@media (max-width: 640px) { .prose { font-size: 1rem; line-height: 1.85; } .prose h2 { font-size: 1.4rem; } .toc { padding: 1rem 1.1rem; } }
+@media (max-width: 640px) { .prose { font-size: 1rem; line-height: 1.85; } .prose h2 { font-size: 1.4rem; } .toc { padding: .95rem 1rem .95rem .95rem; } }

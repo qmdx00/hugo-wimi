@@ -28,7 +28,9 @@ if (galleries.length) {
   image.alt = "";
   const caption = document.createElement("p");
   caption.className = "image-dialog-caption";
-  dialog.append(closeButton, prevButton, image, nextButton, caption);
+  const counter = document.createElement("p");
+  counter.className = "image-dialog-counter";
+  dialog.append(closeButton, prevButton, image, nextButton, caption, counter);
   document.body.append(dialog);
   let items = [];
   let current = 0;
@@ -40,12 +42,19 @@ if (galleries.length) {
     nextButton.hidden = !multi;
   }
 
+  function formatCounter(index, total) {
+    const template = msg.galleryCounter || "%s / %s";
+    return template.replace("%s", String(index)).replace("%s", String(total));
+  }
+
   function show(index) {
     current = (index + items.length) % items.length;
     const source = items[current];
     image.src = source.dataset.full || source.currentSrc || source.src;
     image.alt = source.alt || "";
     caption.textContent = source.closest("figure")?.querySelector("figcaption")?.textContent || source.alt || "";
+    counter.textContent = formatCounter(current + 1, items.length);
+    counter.hidden = items.length < 1;
     updateNav();
   }
 

@@ -2,14 +2,17 @@
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" | default "" -}}
 {{- $sizes := .Get "sizes" | default "(max-width: 640px) 100vw, 44rem" -}}
+{{- $width := .Get "width" -}}
+{{- $height := .Get "height" -}}
 <figure>
   <img
     src="{{ $src }}"
     {{ with .Get "srcset" }}srcset="{{ . }}"{{ end }}
     sizes="{{ $sizes }}"
     alt="{{ $alt }}"
-    {{ with .Get "width" }}width="{{ . }}"{{ end }}
-    {{ with .Get "height" }}height="{{ . }}"{{ end }}
+    {{ with $width }}width="{{ . }}"{{ end }}
+    {{ with $height }}height="{{ . }}"{{ end }}
+    {{ if and $width $height }}style="aspect-ratio: {{ $width }} / {{ $height }}"{{ end }}
     loading="lazy"
     decoding="async">
   {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}

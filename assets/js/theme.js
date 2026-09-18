@@ -12,6 +12,7 @@
     light: (i18n && i18n.dataset.light) || "Light",
     dark: (i18n && i18n.dataset.dark) || "Dark",
   };
+  const toggleLabel = (i18n && i18n.dataset.toggle) || "Color mode";
 
   function readMode() {
     try {
@@ -24,9 +25,10 @@
   function apply(mode) {
     if (mode === "light" || mode === "dark") root.setAttribute("data-theme", mode);
     else root.removeAttribute("data-theme");
-    if (labelNode) labelNode.textContent = labels[mode] || labels.system;
+    const modeName = labels[mode] || labels.system;
+    if (labelNode) labelNode.textContent = modeName;
     if (button) {
-      button.setAttribute("aria-label", (i18n && i18n.dataset.toggle) || "Color mode");
+      button.setAttribute("aria-label", toggleLabel + ": " + modeName);
       button.dataset.mode = mode;
     }
   }
