@@ -1,14 +1,15 @@
 .site-shell { min-height: 100vh; display: flex; flex-direction: column; }
-.site-header { position: sticky; top: 0; z-index: 40; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .4rem max(24px, calc((100vw - var(--gallery-width)) / 2)); background: var(--bg); border-bottom: 1px solid var(--line); }
+.site-header { position: sticky; top: 0; z-index: 40; min-height: 56px; display: flex; align-items: center; padding-block: .4rem; background: var(--bg); border-bottom: 1px solid var(--line); }
+.site-header-inner, .site-footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: min(calc(100% - 48px), var(--measure)); margin-inline: auto; }
 @supports (background: color-mix(in srgb, white, transparent)) { .site-header { background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); } }
-.site-brand { flex: 0 0 auto; color: var(--fg); font-size: .98rem; font-weight: 650; letter-spacing: -.03em; }
+.site-brand { flex: 0 0 auto; color: var(--fg); font-size: 1.3rem; font-weight: 700; letter-spacing: -.04em; line-height: 1.2; }
 .site-brand:hover { color: var(--accent); }
 .site-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: .3rem; min-width: 0; }
 .site-nav ul { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: .2rem; margin: 0; padding: 0; list-style: none; }
 .site-nav a, .theme-toggle { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.15rem; padding: .35rem .65rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: .875rem; white-space: nowrap; }
 .site-nav a:hover, .theme-toggle:hover { background: var(--line); color: var(--fg); }
 .site-nav a[aria-current="page"] { background: var(--line); color: var(--fg); }
-.theme-toggle { flex: 0 0 auto; }
+.theme-toggle { flex: 0 0 auto; justify-content: center; width: 2.2rem; padding-inline: 0; }
 .theme-icon { display: grid; place-items: center; width: 1rem; height: 1rem; }
 .theme-icon svg { display: none; width: 1rem; height: 1rem; }
 .theme-toggle[data-mode="system"] .theme-icon-system, .theme-toggle[data-mode="light"] .theme-icon-light, .theme-toggle[data-mode="dark"] .theme-icon-dark { display: block; }
@@ -17,10 +18,8 @@
 .surface-paper { background: var(--paper-bg); color: var(--paper-fg); }
 .surface-photo { background: var(--bg); color: var(--fg); }
 .reading-width { width: min(calc(100% - 48px), var(--measure)); margin-inline: auto; }
-.gallery-width { width: min(calc(100% - 40px), var(--gallery-width)); margin-inline: auto; }
 .paper-wrap { padding-block: 40px 64px; }
-.photo-wrap { padding-block: 24px 48px; }
-.site-footer { display: flex; justify-content: space-between; gap: 1rem; width: 100%; padding: 24px max(24px, calc((100vw - var(--gallery-width)) / 2)); border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+.site-footer { width: 100%; padding-block: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
 .site-footer p { margin: 0; }
 .site-footer a:hover { color: var(--accent); }
 .home-intro { margin: 0 0 40px; }
@@ -57,16 +56,16 @@
 .empty-state-message { margin: 0; color: var(--muted); font-size: .95rem; }
 .guestbook-empty { margin-top: 24px; }
 @media (max-width: 640px) {
-  .site-header { align-items: flex-start; flex-wrap: wrap; gap: .15rem .5rem; padding: .65rem 20px; }
+  .site-header { padding-block: .65rem; }
+  .site-header-inner { align-items: flex-start; flex-wrap: wrap; gap: .15rem .5rem; }
   .site-brand { padding: .3rem 0; }
   .site-header-actions { width: 100%; justify-content: space-between; }
   .site-nav { min-width: 0; }
   .site-nav ul { justify-content: flex-start; gap: 0; }
   .site-nav a, .theme-toggle { padding-inline: .45rem; font-size: .8rem; }
-  .theme-label { display: none; }
-  .reading-width, .gallery-width { width: min(calc(100% - 40px), var(--gallery-width)); }
+  .reading-width, .site-header-inner, .site-footer-inner { width: calc(100% - 40px); }
   .paper-wrap { padding-block: 32px 56px; }
   .home-intro { margin-bottom: 32px; }
-  .site-footer { display: block; padding-inline: 20px; }
+  .site-footer-inner { display: block; }
   .site-footer span + span { display: block; margin-top: .3rem; }
 }

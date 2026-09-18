@@ -4,7 +4,6 @@
   const KEY = "wimi-color-mode";
   const ORDER = ["system", "dark", "light"];
   const root = document.documentElement;
-  const labelNode = document.querySelector("[data-theme-label]");
   const button = document.querySelector("[data-theme-toggle]");
   const i18n = document.getElementById("wimi-theme-i18n");
   const labels = {
@@ -26,7 +25,6 @@
     if (mode === "light" || mode === "dark") root.setAttribute("data-theme", mode);
     else root.removeAttribute("data-theme");
     const modeName = labels[mode] || labels.system;
-    if (labelNode) labelNode.textContent = modeName;
     if (button) {
       button.setAttribute("aria-label", toggleLabel + ": " + modeName);
       button.dataset.mode = mode;

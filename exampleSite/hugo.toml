@@ -44,7 +44,6 @@ copyright = 'Wimi'
   [params.article]
     tocOpen = true
     tocTitle = '目录'
-    showAuthor = true
     showTaxonomies = true
 
   # Demo only — wire Pages Functions + D1 + Turnstile + Access for production

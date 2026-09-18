@@ -20,6 +20,11 @@
   {{ with resources.Get "js/theme.js" | minify | fingerprint }}
     <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
   {{ end }}
+  {{ if and (eq .Section "posts") .IsPage .Params.toc }}
+    {{ with resources.Get "js/post-toc.js" | minify | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
+  {{ end }}
   {{ if $galleryPage }}
     {{ with resources.Get "js/gallery.js" | minify | fingerprint }}
       <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>

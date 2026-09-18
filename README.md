@@ -27,7 +27,7 @@ content/
   guestbook/_index.md       留言页
 ```
 
-文章 front matter 可使用 Hugo 标准的 `date`、`tags`、`categories`，以及 `toc: true` 开启目录。相册正文只写一小段介绍，照片数据放在 front matter，不必插入图片 shortcode：
+文章 front matter 可使用 Hugo 标准的 `date`、`tags`、`categories`；`description` 会显示在标题下方，`toc: true` 开启文章大纲。桌面端大纲在正文左侧跟随滚动并高亮当前小节，较窄屏幕上显示为正文前的目录卡片。`params.article.tocOpen` 控制目录初始展开状态。Markdown 图片和 `figure` shortcode 图片都限制在正文栏宽度内。相册正文只写一小段介绍，照片数据放在 front matter，不必插入图片 shortcode：
 
 ```yaml
 ---
@@ -84,7 +84,6 @@ theme = 'hugo-wimi'
   [params.article]
     tocOpen = true
     tocTitle = '目录'
-    showAuthor = true
     showTaxonomies = true
 
   [params.photos]

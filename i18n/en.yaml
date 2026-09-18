@@ -26,6 +26,9 @@ backHome:
   other: Back to home
 toc:
   other: Contents
+readingTime:
+  one: About 1 minute
+  other: About {{ . }} minutes
 comments:
   other: Comments
 guestbook:

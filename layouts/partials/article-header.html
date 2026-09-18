@@ -2,7 +2,7 @@
   <h1>{{ .Title }}</h1>
   <div class="article-meta">
     {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (site.Params.dateFormat | default "2006/01/02") }}</time>{{ end }}
-    {{ if site.Params.article.showAuthor }}{{ with (.Params.author | default site.Params.author) }}<span>{{ . }}</span>{{ end }}{{ end }}
+    {{ if eq .Section "posts" }}<span>{{ i18n "readingTime" .ReadingTime }}</span>{{ end }}
     {{ if site.Params.article.showTaxonomies }}
       {{ range .GetTerms "categories" }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}
       {{ range .GetTerms "tags" }}<a href="{{ .RelPermalink }}">#{{ .Title }}</a>{{ end }}

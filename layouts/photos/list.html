@@ -1,6 +1,6 @@
 {{ define "main" }}
-<div class="gallery-width album-index photo-wrap">
-  <header class="page-heading photo-page-heading">
+<div class="reading-width album-index paper-wrap">
+  <header class="page-heading">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-lead">{{ . }}</div>{{ else }}{{ with .Description }}<p class="page-lead">{{ . }}</p>{{ end }}{{ end }}
   </header>
@@ -10,7 +10,7 @@
       {{ $cover := partial "photo-cover.html" . }}
       {{ $first := dict }}
       {{ with .Params.photos }}{{ $first = index . 0 }}{{ end }}
-      {{ $sizes := $first.sizes | default "(max-width: 560px) 100vw, (max-width: 960px) 50vw, 33vw" }}
+      {{ $sizes := $first.sizes | default "(max-width: 560px) 100vw, 25rem" }}
       <a class="album-card" href="{{ .RelPermalink }}" aria-label="{{ i18n "viewAlbumNamed" .Title }}">
         <div class="card-media">
           {{ if $cover }}

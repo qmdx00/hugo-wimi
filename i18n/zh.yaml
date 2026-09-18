@@ -26,6 +26,8 @@ backHome:
   other: 返回首页
 toc:
   other: 目录
+readingTime:
+  other: 约 {{ . }} 分钟
 comments:
   other: 评论
 guestbook:

@@ -1,7 +1,4 @@
-.photo-page-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 4px 20px; }
-.photo-page-heading h1 { color: var(--muted); font-size: 1rem; letter-spacing: .04em; }
-.photo-page-heading .page-lead { margin: 0; font-size: .875rem; }
-.masonry { columns: 3; column-gap: var(--gutter); }
+.masonry { columns: 2; column-gap: var(--gutter); }
 .album-card, .photo-gallery figure { display: block; break-inside: avoid; margin: 0 0 var(--gutter); }
 .album-card, .photo-card { overflow: hidden; border-radius: var(--radius); background: var(--bg-elev); box-shadow: 0 0 0 1px var(--card-ring); transition: transform 180ms ease, box-shadow 180ms ease; }
 .album-card { color: var(--fg); }
@@ -13,11 +10,6 @@
 .album-caption { padding: 10px 12px 12px; }
 .album-caption h2 { margin: 0; font-size: .9rem; font-weight: 600; }
 .album-caption time { display: block; margin-top: 3px; color: var(--muted); font-size: .78rem; }
-.album-head { margin: 0 4px 20px; }
-.album-head h1 { margin: 0 0 4px; font-size: 1.35rem; font-weight: 600; }
-.album-head .album-prose { margin: 0; }
-.album-head .album-prose > :first-child { margin-top: 0; }
-.album-head .album-prose > :last-child { margin-bottom: 0; }
 .album-meta { margin: 8px 0 0; color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; }
 .photo-card { display: block; width: 100%; padding: 0; border: 0; text-align: left; cursor: zoom-in; }
 .photo-gallery figure > img { display: block; width: 100%; height: auto; border-radius: var(--radius); cursor: zoom-in; }
@@ -36,6 +28,5 @@
 .image-dialog-close { top: 8px; right: 8px; }
 .image-dialog-prev { left: 4px; top: calc(50% - 22px); }
 .image-dialog-next { right: 4px; top: calc(50% - 22px); }
-@media (max-width: 960px) { .masonry { columns: 2; } }
-@media (max-width: 560px) { .masonry { columns: 1; } .photo-page-heading { display: block; } .photo-page-heading .page-lead { margin-top: 6px; } }
+@media (max-width: 560px) { .masonry { columns: 1; } }
 @media (prefers-reduced-motion: reduce) { .album-card, .photo-card { transition: none; } }

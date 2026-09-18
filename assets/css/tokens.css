@@ -16,11 +16,10 @@
   --card-ring: rgba(0, 0, 0, .08);
   --shadow: 0 10px 28px rgba(0, 0, 0, .1);
   --on-ink: #fff;
-  --measure: 42rem;
-  --gallery-width: 82.5rem;
+  --measure: 50rem;
   --gutter: 14px;
   --radius: 14px;
-  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-body: "Iowan Old Style", Georgia, "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "Noto Serif SC", "SimSun", serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 

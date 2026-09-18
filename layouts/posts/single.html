@@ -1,0 +1,20 @@
+{{ define "main" }}
+{{ $toc := .TableOfContents }}
+{{ $showTOC := and .Params.toc (gt (len (findRE "<a " $toc)) 0) }}
+<div class="post-layout{{ if $showTOC }} has-toc{{ end }}">
+  {{ if $showTOC }}
+    <aside class="post-toc" aria-label="{{ site.Params.article.tocTitle | default (i18n "toc") }}" data-post-toc>
+      <details{{ if site.Params.article.tocOpen }} open{{ end }}>
+        <summary class="toc-label">{{ site.Params.article.tocTitle | default (i18n "toc") }}</summary>
+        {{ $toc }}
+      </details>
+    </aside>
+  {{ end }}
+  <article class="post-article" data-post-article>
+    {{ partial "article-header.html" . }}
+    {{ with .Description }}<p class="post-lead">{{ . }}</p>{{ end }}
+    <div class="post-body prose">{{ .Content }}</div>
+  </article>
+</div>
+{{ partial "comments.html" . }}
+{{ end }}
