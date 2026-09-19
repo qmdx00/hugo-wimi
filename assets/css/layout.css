@@ -56,13 +56,13 @@
 .empty-state-message { margin: 0; color: var(--muted); font-size: .95rem; }
 .guestbook-empty { margin-top: 24px; }
 @media (max-width: 640px) {
-  .site-header { padding-block: .65rem; }
-  .site-header-inner { align-items: flex-start; flex-wrap: wrap; gap: .15rem .5rem; }
-  .site-brand { padding: .3rem 0; }
-  .site-header-actions { width: 100%; justify-content: space-between; }
+  .site-header { padding-block: .55rem; }
+  .site-header-inner { align-items: center; flex-wrap: wrap; gap: .35rem .75rem; }
+  .site-brand { padding: .2rem 0; line-height: 1.2; }
+  .site-header-actions { width: 100%; justify-content: space-between; min-height: 2.15rem; }
   .site-nav { min-width: 0; }
-  .site-nav ul { justify-content: flex-start; gap: 0; }
-  .site-nav a, .theme-toggle { padding-inline: .45rem; font-size: .8rem; }
+  .site-nav ul { justify-content: flex-start; gap: .15rem; }
+  .site-nav a, .theme-toggle { min-height: 2.15rem; padding-inline: .5rem; font-size: .84rem; }
   .reading-width, .site-header-inner, .site-footer-inner { width: calc(100% - 40px); }
   .paper-wrap { padding-block: 32px 56px; }
   .home-intro { margin-bottom: 32px; }

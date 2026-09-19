@@ -62,7 +62,10 @@ for (const root of document.querySelectorAll("[data-comments]")) {
       const response = await fetch(url, { headers: { Accept: "application/json" } });
       if (!response.ok) throw new Error(msg.loadError || "无法加载评论");
       const result = await response.json();
-      if (!append) list.replaceChildren();
+      if (!append) {
+        list.classList.remove("is-loading");
+        list.replaceChildren();
+      }
       for (const comment of result.items) list.append(entry(comment));
       if (!result.items.length && !append) {
         const empty = document.createElement("p");
@@ -74,6 +77,7 @@ for (const root of document.querySelectorAll("[data-comments]")) {
       cursor = result.nextCursor;
       more.hidden = !cursor;
     } catch {
+      list.classList.remove("is-loading");
       if (!append) list.textContent = msg.unavailable || "评论暂时不可用，文章仍可正常阅读。";
       more.hidden = true;
     }

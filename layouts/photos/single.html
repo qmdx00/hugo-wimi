@@ -12,7 +12,7 @@
         {{ $preview := partial "photo-url.html" (.preview | default .src) }}
         {{ $sizes := .sizes | default "(max-width: 560px) 100vw, 25rem" }}
         <figure class="photo-item">
-          <button type="button" class="photo-card" data-full="{{ $full }}">
+          <button type="button" class="photo-card" data-full="{{ $full }}"{{ if and .width .height }} style="--photo-ratio: {{ .width }} / {{ .height }}"{{ end }}>
             <img
               src="{{ $preview }}"
               {{ with .srcset }}srcset="{{ . }}"{{ end }}
@@ -21,7 +21,9 @@
               {{ with .width }}width="{{ . }}"{{ end }}
               {{ with .height }}height="{{ . }}"{{ end }}
               loading="lazy"
-              decoding="async">
+              decoding="async"
+              onload="this.classList.add('is-loaded')"
+              onerror="this.classList.add('is-loaded')">
           </button>
           {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
         </figure>

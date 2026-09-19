@@ -1,5 +1,17 @@
 "use strict";
 
+function markPhotoLoaded(img) {
+  img.classList.add("is-loaded");
+}
+
+for (const img of document.querySelectorAll(".card-media img, .photo-card img")) {
+  if (img.complete && img.naturalWidth) markPhotoLoaded(img);
+  else {
+    img.addEventListener("load", () => markPhotoLoaded(img), { once: true });
+    img.addEventListener("error", () => markPhotoLoaded(img), { once: true });
+  }
+}
+
 function messages() {
   const node = document.getElementById("wimi-i18n");
   return node ? node.dataset : {};
@@ -24,13 +36,19 @@ if (galleries.length) {
   const closeButton = dialogButton("image-dialog-close", msg.galleryClose || "关闭图片", "×");
   const prevButton = dialogButton("image-dialog-prev", msg.galleryPrev || "上一张", "‹");
   const nextButton = dialogButton("image-dialog-next", msg.galleryNext || "下一张", "›");
+  const stage = document.createElement("div");
+  stage.className = "image-dialog-stage";
   const image = document.createElement("img");
   image.alt = "";
+  const meta = document.createElement("div");
+  meta.className = "image-dialog-meta";
   const caption = document.createElement("p");
   caption.className = "image-dialog-caption";
   const counter = document.createElement("p");
   counter.className = "image-dialog-counter";
-  dialog.append(closeButton, prevButton, image, nextButton, caption, counter);
+  meta.append(caption, counter);
+  stage.append(image, meta);
+  dialog.append(closeButton, prevButton, stage, nextButton);
   document.body.append(dialog);
   let items = [];
   let current = 0;

@@ -27,7 +27,7 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --bg: #0c0c0c;
-    --bg-elev: #161616;
+    --bg-elev: #1c1c1c;
     --fg: #f2f2f0;
     --muted: #a6a69e;
     --subtle: #999990;
@@ -39,7 +39,7 @@
     --selection: #514637;
     --code-bg: #1c1c1c;
     --input-border: #52524c;
-    --card-ring: rgba(255, 255, 255, .08);
+    --card-ring: rgba(255, 255, 255, .16);
     --shadow: 0 10px 28px rgba(0, 0, 0, .4);
     --on-ink: #121212;
   }
@@ -48,7 +48,7 @@
 html[data-theme="dark"] {
   color-scheme: dark;
   --bg: #0c0c0c;
-  --bg-elev: #161616;
+  --bg-elev: #1c1c1c;
   --fg: #f2f2f0;
   --muted: #a6a69e;
   --subtle: #999990;
@@ -60,7 +60,7 @@ html[data-theme="dark"] {
   --selection: #514637;
   --code-bg: #1c1c1c;
   --input-border: #52524c;
-  --card-ring: rgba(255, 255, 255, .08);
+  --card-ring: rgba(255, 255, 255, .16);
   --shadow: 0 10px 28px rgba(0, 0, 0, .4);
   --on-ink: #121212;
 }

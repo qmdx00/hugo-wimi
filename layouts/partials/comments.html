@@ -15,14 +15,14 @@
       <label class="comment-message">{{ i18n "body" }} <span aria-hidden="true">*</span><textarea name="body" rows="5" maxlength="2000" required></textarea></label>
       <div class="comment-actions">
         {{ with site.Params.comments.turnstileSiteKey }}
-          <div class="cf-turnstile" data-sitekey="{{ . }}"></div>
+          <div class="turnstile-slot"><div class="cf-turnstile" data-sitekey="{{ . }}"></div></div>
         {{ end }}
         <button type="submit">{{ if $guestbook }}{{ i18n "submitGuestbook" }}{{ else }}{{ i18n "submitComment" }}{{ end }}</button>
       </div>
       <p class="form-note">{{ i18n "formNote" }}</p>
       <p class="form-status" data-comment-status role="status" aria-live="polite"></p>
     </form>
-    <div class="comment-list" data-comment-list aria-live="polite"><p class="empty-state">{{ i18n "loadingComments" }}</p></div>
+    <div class="comment-list is-loading" data-comment-list aria-live="polite"><p class="empty-state">{{ i18n "loadingComments" }}</p></div>
     <button class="load-more" data-load-more type="button" hidden>{{ i18n "loadMore" }}</button>
   </section>
 {{ else if $guestbook }}

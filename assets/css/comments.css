@@ -8,6 +8,10 @@
 .comment-message { margin-top: 0; }
 .optional, .form-note { color: var(--muted); }
 .comment-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.turnstile-slot { display: block; width: min(100%, 300px); min-height: 65px; }
+.cf-turnstile { min-height: 65px; }
+.comment-list { min-height: 5.5rem; }
+.comment-list.is-loading { color: var(--muted); }
 .comment-actions button, .load-more { padding: 8px 16px; border: 1px solid var(--paper-fg); border-radius: 999px; background: var(--paper-fg); color: var(--on-ink); font-size: .9rem; }
 .comment-actions button:hover, .load-more:hover { border-color: var(--accent); background: var(--accent); color: var(--on-ink); }
 .comment-actions button:disabled { opacity: .55; cursor: wait; }

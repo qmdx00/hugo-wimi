@@ -12,7 +12,7 @@
       {{ with .Params.photos }}{{ $first = index . 0 }}{{ end }}
       {{ $sizes := $first.sizes | default "(max-width: 560px) 100vw, 25rem" }}
       <a class="album-card" href="{{ .RelPermalink }}" aria-label="{{ i18n "viewAlbumNamed" .Title }}">
-        <div class="card-media">
+        <div class="card-media"{{ if and $first.width $first.height }} style="--photo-ratio: {{ $first.width }} / {{ $first.height }}"{{ end }}>
           {{ if $cover }}
             <img
               src="{{ $cover }}"
@@ -21,7 +21,9 @@
               alt=""
               {{ if not .Params.cover }}{{ with $first.width }}width="{{ . }}"{{ end }}{{ with $first.height }}height="{{ . }}"{{ end }}{{ end }}
               loading="lazy"
-              decoding="async">
+              decoding="async"
+              onload="this.classList.add('is-loaded')"
+              onerror="this.classList.add('is-loaded')">
           {{ else }}
             <span class="album-placeholder">{{ i18n "viewAlbum" }}</span>
           {{ end }}

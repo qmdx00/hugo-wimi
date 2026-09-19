@@ -3,6 +3,16 @@
   const article = document.querySelector("[data-post-article]");
   if (!toc || !article) return;
 
+  const details = toc.querySelector("details");
+  const preferOpen = toc.dataset.tocOpen !== "false";
+  const desktop = window.matchMedia("(min-width: 1320px)");
+  function syncOpen() {
+    if (!details) return;
+    details.open = desktop.matches && preferOpen;
+  }
+  syncOpen();
+  desktop.addEventListener("change", syncOpen);
+
   const entries = [...toc.querySelectorAll('a[href^="#"]')]
     .map((link) => {
       const id = decodeURIComponent(link.hash.slice(1));
