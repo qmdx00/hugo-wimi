@@ -24,20 +24,20 @@
 .image-dialog { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); overflow: hidden; border: 0; background: rgba(0, 0, 0, .94); color: #fff; }
 .image-dialog::backdrop { background: rgba(0, 0, 0, .94); }
 .image-dialog[open] { display: flex; align-items: center; justify-content: center; }
-.image-dialog-stage { position: relative; display: flex; max-width: 100%; max-height: 100%; }
-.image-dialog-stage img { display: block; max-width: 100%; max-height: min(88dvh, calc(100dvh - 24px)); width: auto; height: auto; object-fit: contain; border-radius: 4px; }
-.image-dialog-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 12px 10px; background: linear-gradient(transparent, rgba(0, 0, 0, .55)); pointer-events: none; }
-.image-dialog-caption, .image-dialog-counter { margin: 0; color: rgba(255, 255, 255, .82); font-size: .8rem; text-align: center; }
-.image-dialog-caption:empty, .image-dialog-counter:empty { display: none; }
-.image-dialog-counter { margin-top: 3px; font-variant-numeric: tabular-nums; }
-.image-dialog button { position: absolute; z-index: 1; display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 999px; background: rgba(0, 0, 0, .24); color: #fff; font-size: 1.6rem; }
-.image-dialog button:hover { background: rgba(255, 255, 255, .18); }
+.image-dialog-shell { display: grid; grid-template-columns: 3.25rem minmax(0, 70rem) 3.25rem; align-items: center; column-gap: .5rem; width: min(100%, calc(70rem + 7.5rem)); max-height: 100%; }
+.image-dialog-frame { display: flex; align-items: center; justify-content: center; min-width: 0; max-width: 70rem; }
+.image-dialog-frame img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(88dvh, calc(100dvh - 2.5rem)); object-fit: contain; border-radius: 4px; }
+.image-dialog button { z-index: 1; display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .12); color: #fff; font-size: 1.6rem; }
+.image-dialog button:hover { background: rgba(255, 255, 255, .22); }
 .image-dialog button:focus-visible { outline-color: #fff; }
-.image-dialog button[hidden] { display: none; }
-.image-dialog-close { top: max(8px, env(safe-area-inset-top)); right: max(8px, env(safe-area-inset-right)); }
-.image-dialog-prev { left: max(4px, env(safe-area-inset-left)); top: 50%; transform: translateY(-50%); }
-.image-dialog-next { right: max(4px, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); }
-@media (max-width: 560px) { .masonry { columns: 1; } .image-dialog-stage img { max-height: min(88dvh, calc(100dvh - 16px)); } }
+.image-dialog-prev, .image-dialog-next { position: static; justify-self: center; }
+.image-dialog-prev[hidden], .image-dialog-next[hidden] { display: grid; visibility: hidden; }
+.image-dialog-close { position: absolute; top: max(8px, env(safe-area-inset-top)); right: max(8px, env(safe-area-inset-right)); }
+@media (max-width: 560px) {
+  .masonry { columns: 1; }
+  .image-dialog-shell { grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem; column-gap: .25rem; width: 100%; }
+  .image-dialog-frame img { max-height: min(86dvh, calc(100dvh - 2rem)); }
+}
 @keyframes photo-skeleton { to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) {
   .album-card, .photo-card { transition: none; }

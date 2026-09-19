@@ -36,19 +36,15 @@ if (galleries.length) {
   const closeButton = dialogButton("image-dialog-close", msg.galleryClose || "关闭图片", "×");
   const prevButton = dialogButton("image-dialog-prev", msg.galleryPrev || "上一张", "‹");
   const nextButton = dialogButton("image-dialog-next", msg.galleryNext || "下一张", "›");
-  const stage = document.createElement("div");
-  stage.className = "image-dialog-stage";
+  const shell = document.createElement("div");
+  shell.className = "image-dialog-shell";
+  const frame = document.createElement("div");
+  frame.className = "image-dialog-frame";
   const image = document.createElement("img");
   image.alt = "";
-  const meta = document.createElement("div");
-  meta.className = "image-dialog-meta";
-  const caption = document.createElement("p");
-  caption.className = "image-dialog-caption";
-  const counter = document.createElement("p");
-  counter.className = "image-dialog-counter";
-  meta.append(caption, counter);
-  stage.append(image, meta);
-  dialog.append(closeButton, prevButton, stage, nextButton);
+  frame.append(image);
+  shell.append(prevButton, frame, nextButton);
+  dialog.append(closeButton, shell);
   document.body.append(dialog);
   let items = [];
   let current = 0;
@@ -60,20 +56,12 @@ if (galleries.length) {
     nextButton.hidden = !multi;
   }
 
-  function formatCounter(index, total) {
-    const template = msg.galleryCounter || "%s / %s";
-    return template.replace("%s", String(index)).replace("%s", String(total));
-  }
-
   function show(index) {
     current = (index + items.length) % items.length;
     const source = items[current];
     const thumb = source.tagName === "IMG" ? source : source.querySelector("img");
     image.src = source.dataset.full || thumb?.dataset.full || thumb?.currentSrc || thumb?.src || "";
     image.alt = thumb?.alt || "";
-    caption.textContent = source.closest("figure")?.querySelector("figcaption")?.textContent || thumb?.alt || "";
-    counter.textContent = formatCounter(current + 1, items.length);
-    counter.hidden = items.length < 1;
     updateNav();
   }
 
